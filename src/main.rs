@@ -7,6 +7,7 @@ enum Operation {
     Divide
 }
 
+
 // Functions must denote type as part of args.
 // Functions must denote return type after -> after args!
 fn sum(a:i32, b:i32) -> i32 {
@@ -32,8 +33,8 @@ fn do_operation(op:&str, a: i32, b: i32) -> Option<i32> {
     match op {
         "+" => Some(sum(a, b)),
         "-" => Some(subtract(a,b)),
-        "mult" => Some(multiply(a,b)),
-        "div" => Some(divide(a,b)),
+        "*" => Some(multiply(a,b)),
+        "/" => Some(divide(a,b)),
         _ => None
     }
 }
@@ -59,6 +60,32 @@ fn main() {
     let val1: i32 = get_arg(args.get(2)).parse().unwrap();
     let val2: i32 = get_arg(args.get(3)).parse().unwrap();
 
+    let mut avec = Vec::new();
+
+    // Can push to the vector
+    avec.push(2.2);
+    avec.push(9.2);
+    avec.push(2.);
+
+    // Can pop from the vector
+    avec.pop();
+
+    // Can assign to the vector
+    avec[0] = 3.9;
+
+    println!("Avec value? {:?}", avec);
+
+    for i in &avec {
+       println!("Our reference to avec, non-mutable {}", i);
+    }
+
+    for i in avec {
+        println!("We are taking ownership of avec {}", i);
+    }
+
+    // This will never work due to above loop taking ownership of avec
+    // We moved avec.
+    println!("Avec value? {:?}", avec);
 
     println!("First arg! {}", op);
     println!("Val 1! {}", val1);
